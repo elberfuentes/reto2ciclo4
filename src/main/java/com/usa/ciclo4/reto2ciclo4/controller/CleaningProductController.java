@@ -1,6 +1,7 @@
 package com.usa.ciclo4.reto2ciclo4.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.usa.ciclo4.reto2ciclo4.model.CleaningProduct;
 import com.usa.ciclo4.reto2ciclo4.service.CleaningProductService;
@@ -18,6 +19,11 @@ public class CleaningProductController {
     @GetMapping("/all")
     public List<CleaningProduct> getAll(){
         return cleaningProductService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<CleaningProduct> getCleaningProduct(@PathVariable("id") Integer id) {
+        return cleaningProductService.getCleaningProduct(id);
     }
 
     @PostMapping("/new")
