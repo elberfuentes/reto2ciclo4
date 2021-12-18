@@ -34,7 +34,7 @@ public void delete(CleaningProduct cleaningproduct){
 }
 
 public List<CleaningProduct> getByPrice(double price){
-    return cleaningProductCrudRepository.findByPrice(price);
+    return cleaningProductCrudRepository.findByPriceLessThanEqual(price);
 }
 
 public List<CleaningProduct> getByDescriptionContains(String description){
