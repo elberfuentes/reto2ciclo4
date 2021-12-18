@@ -43,4 +43,14 @@ public class CleaningProductController {
     public boolean delete(@PathVariable("id") int id){
         return cleaningProductService.delete(id);
     }
+
+    @GetMapping("/price/{price}")
+    public List<CleaningProduct> getByPrice(@PathVariable("price") double price){
+        return cleaningProductService.getByPrice(price);
+    }
+
+    @GetMapping("/description/{description}")
+    public List<CleaningProduct> getByDescriptionContains(@PathVariable("description") String description){
+        return cleaningProductService.getByDescriptionContains(description);
+    }
 }

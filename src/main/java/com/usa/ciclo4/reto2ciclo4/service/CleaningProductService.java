@@ -72,4 +72,12 @@ public class CleaningProductService {
             return true;
         }).orElse(false);
     }
+
+    public List<CleaningProduct> getByPrice(double price){
+        return cleaningProductRepository.getByPrice(price);
+    }
+
+    public List<CleaningProduct> getByDescriptionContains(String description){
+        return cleaningProductRepository.getByDescriptionContains(description);
+    }
 }

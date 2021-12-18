@@ -3,26 +3,38 @@ package com.usa.ciclo4.reto2ciclo4.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.usa.ciclo4.reto2ciclo4.model.User;
 import com.usa.ciclo4.reto2ciclo4.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * @author Elber Fernando Fuentes Moreno
+ */
 @Service
 public class UserService {
+    /**
+     * autowired
+     */
     @Autowired
     private UserRepository userRepository;
-
+    /**
+     * 
+     * @return
+     */
     public List<User> getAll() {
         return userRepository.getAll();
     }
-
+    /**
+     * get user
+     */
     public Optional<User> getUser(int id) {
         return userRepository.getUser(id);
     }
-
+    /**
+     * 
+     * @param user
+     * @return
+     */
     public User save(User user) {
         if (user.getId() == null) {
             return user;
@@ -39,7 +51,11 @@ public class UserService {
             }
         }
     }
-
+    /**
+     * 
+     * @param user
+     * @return
+     */
     public User update(User user) {
         if (user.getId() != null) {
             Optional<User> dbUser = userRepository.getUser(user.getId());
@@ -53,7 +69,7 @@ public class UserService {
                 if (user.getBirthtDay() != null){
                     dbUser.get().setBirthtDay(user.getBirthtDay());
                 }
-
+                
                 if (user.getMonthBirthtDay() != null){
                     dbUser.get().setMonthBirthtDay(user.getMonthBirthtDay());
                 }    
@@ -84,11 +100,19 @@ public class UserService {
         }
         return user;
     }
-
+    /**
+     * 
+     * @param email
+     * @return
+     */
     public boolean emailExists(String email) {
         return userRepository.emailExists(email);
     }
-
+    /**
+     * 
+     * @param userId
+     * @return
+     */
     public boolean delete(int userId) {
         Boolean userBoolean = getUser(userId).map(user -> {
             userRepository.delete(user);
@@ -96,12 +120,21 @@ public class UserService {
         }).orElse(false);
         return userBoolean;
     }
-
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return
+     */
     public User authenticateUser(String email, String password){
         Optional<User> user = userRepository.authenticateUser(email, password);
         if (user.isEmpty()){
             return new User();
         }
         return user.get();
+    }
+
+    public List<User> getByMonthBirthDay(String month){
+        return userRepository.getByMonthBirthtDay(month);
     }
 }
